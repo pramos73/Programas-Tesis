@@ -124,7 +124,26 @@ A diferencia del Programa ESP32-01, el Programa ESP32-02 maneja tres intervalos 
 * La frecuencia de envío a Google Sheets es de 45 s en el Programa ESP32-01 y de 15 s en el Programa ESP32-02.
 
 ---
+## A.3. Scripts de Google Apps Script
 
-## A.3. Código de análisis en Python
+En la carpeta `/Programas_Google_Apps_Script` del repositorio se encuentra el archivo `codigo.gs` (escrito en JavaScript para el entorno de Google Cloud). Este script actúa como el servidor central del proyecto y se encarga de la recepción, el procesamiento y la organización de los datos enviados por ambos microcontroladores ESP32 a través de peticiones HTTP POST.
+
+### A.3.1. Funcionalidades principales
+
+* **Recepción de datos (doPost):** Actúa como un servidor web que recibe los paquetes de datos en formato JSON enviados por los microcontroladores y detecta automáticamente a cuál de los dos dispositivos (ESP32-01 o ESP32-02) pertenecen los datos.
+* **Control de tiempo (Rate Limiting):** Utiliza las propiedades del script (`PropertiesService`) para almacenar la marca de tiempo (timestamp) del último guardado de cada dispositivo. Si un microcontrolador intenta guardar datos antes de los 15 segundos establecidos, el script rechaza la petición y le indica al dispositivo cuántos segundos debe esperar, evitando la saturación de la base de datos.
+* **Creación automatizada de hojas (crearHojasUnaVez):** Verifica que el libro de cálculo contenga las hojas necesarias y, si no existen, las crea automáticamente con sus respectivos encabezados.
+* **Organización visual:** Aplica colores distintivos a los encabezados de las hojas para facilitar la lectura de los datos (Azul para el Micro 01, Verde para el Micro 02 y Naranja para los datos climáticos de OpenWeather).
+* **Combinación de datos (guardarEnHojaCombinada):** Dado que los datos de ambos microcontroladores llegan de forma asíncrona, el script busca la última fila registrada del dispositivo que no envió datos en ese instante y fusiona ambas mediciones en una sola fila dentro de la hoja `Datos_Combinados_2G_1G+FIJOS`, generando un registro unificado y cronológico para el análisis posterior.
+
+### A.3.2. Estructura de las hojas en Google Sheets
+
+El script gestiona tres hojas de cálculo principales:
+1. `2G_Datos_crudos_Seguimiento_Solar`: Almacena las lecturas del seguidor solar de dos ejes (4 LDR, INA219, SHT31, BH1750 y posición de los servos).
+2. `Datos_crudos_1G_+FIJOS`: Almacena las lecturas del seguidor de un eje (2 LDR), los cuatro paneles solares medidos simultáneamente y las condiciones climáticas externas.
+3. `Datos_Combinados_2G_1G+FIJOS`: Es la base de datos final que utiliza el script de Python para el análisis estadístico. Sincroniza en una sola línea de tiempo los datos de todos los sensores y paneles.
+
+
+## A.4. Código de análisis en Python
 
 El archivo `analisis_python.py`, ubicado en la carpeta `/Programas_Python` del repositorio, contiene el script utilizado para el procesamiento de los datos de medición. A través de este código se realizaron los cálculos de energía diaria, la generación de gráficos y los análisis estadísticos de correlación presentados en los capítulos anteriores.
