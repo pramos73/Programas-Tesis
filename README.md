@@ -126,7 +126,7 @@ A diferencia del Programa ESP32-01, el Programa ESP32-02 maneja tres intervalos 
 ---
 ## A.3. Scripts de Google Apps Script
 
-En la carpeta `/Programas_Google_Apps_Script` del repositorio se encuentra el archivo `codigo.gs` (escrito en JavaScript para el entorno de Google Cloud). Este script actúa como el servidor central del proyecto y se encarga de la recepción, el procesamiento y la organización de los datos enviados por ambos microcontroladores ESP32 a través de peticiones HTTP POST.
+En la carpeta `/Programas_Google_Apps_Script` del repositorio se encuentra el archivo `Código.gs` (escrito en JavaScript para el entorno de Google Cloud). Este script actúa como el servidor central del proyecto y se encarga de la recepción, el procesamiento y la organización de los datos enviados por ambos microcontroladores ESP32 a través de peticiones HTTP POST.
 
 ### A.3.1. Funcionalidades principales
 
