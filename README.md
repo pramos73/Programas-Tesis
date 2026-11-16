@@ -143,7 +143,7 @@ El script gestiona tres hojas de cálculo principales:
 2. `Datos_crudos_1G_+FIJOS`: Almacena las lecturas del seguidor de un eje (2 LDR), los cuatro paneles solares medidos simultáneamente y las condiciones climáticas externas.
 3. `Datos_Combinados_2G_1G+FIJOS`: Es la base de datos final que utiliza el script de Python para el análisis estadístico. Sincroniza en una sola línea de tiempo los datos de todos los sensores y paneles.
 
-
+---
 ## A.4. Código de análisis en Python
 
 El archivo `analisis_python.py`, ubicado en la carpeta `/Programas_Python` del repositorio, contiene el script utilizado para el procesamiento de los datos de medición. A través de este código se realizaron los cálculos de energía diaria, la generación de gráficos y los análisis estadísticos de correlación presentados en los capítulos anteriores.
