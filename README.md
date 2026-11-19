@@ -147,3 +147,15 @@ El script gestiona tres hojas de cálculo principales:
 ## A.4. Código de análisis en Python
 
 El archivo `analisis_python.py`, ubicado en la carpeta `/Programas_Python` del repositorio, contiene el script utilizado para el procesamiento de los datos de medición. A través de este código se realizaron los cálculos de energía diaria, la generación de gráficos y los análisis estadísticos de correlación presentados en los capítulos anteriores.
+
+---
+## A.5. Análisis de Sensibilidad Leave-One-Out (LOO)
+
+Este script de Python calcula la energía diaria acumulada de diferentes configuraciones de paneles solares y evalúa la estabilidad de la jerarquía de rendimiento frente a la exclusión de jornadas individuales (técnica *Leave-One-Out*).
+
+### Requisitos
+
+Asegurarse de tener instalado Python 3.x. Luego, instala las dependencias necesarias ejecutando:
+
+```bash
+pip install pandas numpy
